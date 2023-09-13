@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:classroom_poc/Ai_Avatar/create_avatar.dart';
 import 'package:classroom_poc/Utils/utils.dart';
 import 'package:classroom_poc/image_edit/image_editer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final prefs;
+  @override
+  void initState() {
+    storeImage();
+    // TODO: implement initState
+    super.initState();
+  }
+  Future<void> storeImage()async{
+     prefs = await SharedPreferences.getInstance();
+  }
   File? image;
   final ImagePicker picker = ImagePicker();
   @override
@@ -36,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: const Text("Edit Image")),
           ElevatedButton(
-              onPressed: () {}, child: const Text("custom animation"))
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAvatar(prefs: prefs),));
+              }, child: const Text("Custom Animation"))
         ]),
       ),
     );
