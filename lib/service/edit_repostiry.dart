@@ -13,11 +13,9 @@ class PicsEditRepository {
       Map<String, String>? field,
       String? data1}) async {
     return await _apiService.mulitPart<PicsArtSuccessResponse?>(
-        endpoint: Uitls.picsArt(filerType == null
+        endpoint: Utils.picsArt(filerType!
             ? PicsArtEndpoint.BG_REMOVE
-            : filerType
-                ? PicsArtEndpoint.TEXTURE
-                : PicsArtEndpoint.STYLE_TRANSFER),
+            : PicsArtEndpoint.TEXTURE),
         data: data,
         field: field,
         data1: data1,

@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ElevatedButton(
               onPressed: () {
-                Uitls().myAlert(context, anotherImage: true, camera: () {
+                Utils().myAlert(context, anotherImage: true, camera: () {
                   Navigator.of(context).pop();
                   getImage(ImageSource.camera, addImage: true);
                 }, gallery: () {

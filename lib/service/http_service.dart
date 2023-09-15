@@ -75,12 +75,12 @@ class HttpService {
         if (body.isNotEmpty) {
           http.MultipartFile frontFile = await http.MultipartFile.fromPath(
               'image', body,
-              contentType: MediaType('image', Uitls.getImageExtension(body)));
+              contentType: MediaType('image', Utils.getImageExtension(body)));
           if (body1 != null) {
             http.MultipartFile anotherFile = await http.MultipartFile.fromPath(
                 'reference_image', body1,
                 contentType: MediaType(
-                    'reference_image', Uitls.getImageExtension(body1)));
+                    'reference_image', Utils.getImageExtension(body1)));
             request.files.add(anotherFile);
           }
           request.files.add(frontFile);

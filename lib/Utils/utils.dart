@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
-class Uitls {
+class Utils {
   void myAlert(BuildContext context,
       {bool anotherImage = false,
       VoidCallback? gallery,
@@ -60,6 +61,28 @@ class Uitls {
     return "jpg";
   }
 
+  static void saveNetworkImage(BuildContext context,String? path) async {
+    if(path != null) {
+      GallerySaver.saveImage(path).then((bool? success) {
+        print('Image is saved');
+        dialogBuilder(context,Icons.task_alt_rounded,"Image Saved Successfully",Colors.lightGreenAccent);
+      }
+      );
+    }else{
+      dialogBuilder(context,Icons.error_outline_rounded,"Changes can't Found",Colors.red);
+    }
+  }
+  static Future<void> dialogBuilder(BuildContext context,IconData? icon,String? title,Color? color) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return  AlertDialog(
+          title:  Center(child: Icon(icon,size: 40,color:color)),
+            actions:[ Center(child: Text(title!,textAlign: TextAlign.center,style: TextStyle(fontSize: 20,fontStyle: FontStyle.italic),))],
+        );
+      },
+    );
+  }
   static const String picsArtUrl = 'https://api.picsart.io/tools/1.0';
 
   static String picsArt(PicsArtEndpoint endpoint) {

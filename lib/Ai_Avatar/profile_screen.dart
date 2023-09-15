@@ -5,6 +5,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../Utils/Ai_utils.dart';
+import '../Utils/utils.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key, required this.data});
@@ -87,30 +88,28 @@ class _ProfileState extends State<Profile> {
             )),
         height: 200,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text.rich(
-              TextSpan(
-                text: 'Roberty Joe ',
-                children: [
-                  TextSpan(
-                    text: '@robertyjoe',
-                  ),
-                ],
+            if (!isThreeD) SizedBox(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width / 1.1,
+              height: 30,
+              child: OutlinedButton(
+                onPressed: () async {
+                  Utils.saveNetworkImage(context,twoDUrl);
+                },
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.purple,
+                ),
+                child: const Text("Save",
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.white,
+                      // fontFamily: Fonts.regular
+                    )),
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'robertyjoe@artist.com',
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Robery Joe is a 3D artist and '
-                  'designer based in New York City. '
-                  'He is a graduate of the Art Institute '
-                  'of New York City and has been working '
-                  'in the industry for 5 years.',
-            ),
+            )
           ],
         ),
       ),
