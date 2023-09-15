@@ -13,14 +13,14 @@ class HomeController with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<PicsArtSuccessResponse?> bgRemove(
-      String filePath, bool? filterType) async {
+      String filePath, bool? filterType,String? filter) async {
 
     var backgroundTextureField = BackgroundTextureField(
         format: "JPG",
         height: "1024",
         offsetX: "0",
         offsetY: "0",
-        pattern: "tile",
+        pattern: filter,
         rotate: "0",
         scale: "1",
         width: "1024"

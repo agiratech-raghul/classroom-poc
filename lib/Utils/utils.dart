@@ -65,12 +65,54 @@ class Utils {
     if(path != null) {
       GallerySaver.saveImage(path).then((bool? success) {
         print('Image is saved');
-        dialogBuilder(context,Icons.task_alt_rounded,"Image Saved Successfully",Colors.lightGreenAccent);
+        dialogBuilder(context,Icons.task_alt_rounded,"Image Saved Successfully",Colors.lightGreenAccent).then((value) {
+          Navigator.pop(context);
+        });
       }
       );
     }else{
       dialogBuilder(context,Icons.error_outline_rounded,"Changes can't Found",Colors.red);
     }
+  }
+  static Future<String?> textureField(BuildContext context) {
+    return showDialog<String?>(
+      context: context,
+      builder: (BuildContext context) {
+        return  AlertDialog(
+          scrollable: true,
+          title: Column(
+            children: [
+              ElevatedButton(
+              onPressed: (){
+                Navigator.pop(context, "hex");
+                }
+              ,child: Text("hex")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context, "mirror");
+                  }
+                  ,child: Text("mirror")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context, "diamond");
+                  }
+                  ,child: Text("diamond")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context, "hex2");
+                  }
+                  ,child: Text("hex2")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context, "tile");
+                  }
+                  ,child: Text("tile")),
+
+            ],
+          ),
+        );
+      },
+    );
   }
   static Future<void> dialogBuilder(BuildContext context,IconData? icon,String? title,Color? color) {
     return showDialog<void>(

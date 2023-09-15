@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: const Text("Edit Image")),
           ElevatedButton(
               onPressed: () {
+
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAvatar(prefs: prefs),));
               }, child: const Text("Custom Animation"))
         ]),

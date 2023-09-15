@@ -49,22 +49,21 @@ class _ImageEditerState extends State<ImageEditer> {
           children: [
             CommonEditIcons(
               onPressed: () {
-                _controller.bgRemove(widget.image!.path, true);
+                _controller.bgRemove(widget.image!.path, true,'');
               },
               image: "assets/images/background_eraser.png",
               text: "Erasar",
             ),
              CommonEditIcons(
               onPressed: () {
-                _controller.bgRemove(widget.image!.path, false);
+                Utils.textureField(context).then((value) {
+                  _controller.bgRemove(widget.image!.path, false,value);
+                });
               },
               image: "assets/images/texture_icon.png",
               text: "Texture",
             ),
-            const CommonEditIcons(
-              image: "assets/images/merge_image.png",
-              text: "Merge",
-            )
+
           ],
         ),
         SizedBox(
