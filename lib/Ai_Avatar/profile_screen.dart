@@ -1,11 +1,10 @@
+import 'package:classroom_poc/Utils/Ai_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../Utils/Ai_utils.dart';
-import '../Utils/utils.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key, required this.data});
@@ -63,55 +62,28 @@ class _ProfileState extends State<Profile> {
         fit: StackFit.expand,
         children: [
           if (isThreeD)
-            WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              onWebViewCreated: (controller) async {
-                _controller = controller;
-                await loadHtmlFromAssets(_controller, 'assets/viewer.html');
-              },
-              onPageFinished: (page) {
-                debugPrint(widget.data.avatarUrl);
-                _controller.runJavascript(
-                    'window.loadViewer("${widget.data.avatarUrl}");');
-              },
+            // WebView(
+            //   javascriptMode: JavascriptMode.unrestricted,
+            //   onWebViewCreated: (controller) async {
+            //     _controller = controller;
+            //     await loadHtmlFromAssets(_controller, 'assets/viewer.html');
+            //   },
+            //   onPageFinished: (page) {
+            //     debugPrint(widget.data.avatarUrl);
+            //     _controller.runJavascript(
+            //         'window.loadViewer("${widget.data.avatarUrl}");');
+            //   },
+            // ),
+            ModelViewer(
+              backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
+              src: widget.data.avatarUrl.toString(),
+              ar: true,
+              autoRotate: true,
+              disableZoom: true,
             )
           else
             Image.network(twoDUrl, fit: BoxFit.cover),
         ],
-      ),
-      bottomSheet: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            )),
-        height: 200,
-        child: Column(
-          children: [
-            if (!isThreeD) SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width / 1.1,
-              height: 30,
-              child: OutlinedButton(
-                onPressed: () async {
-                  Utils.saveNetworkImage(context,twoDUrl);
-                },
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                ),
-                child: const Text("Save",
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      // fontFamily: Fonts.regular
-                    )),
-              ),
-            )
-          ],
-        ),
       ),
     );
   }

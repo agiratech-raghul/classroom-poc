@@ -15,13 +15,14 @@ class Utils {
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         builder: (context) {
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 4,
+            height: MediaQuery.of(context).size.height / 5,
             child: Column(
               children: [
                 Container(
                   height: 40,
                   width: double.infinity,
                   decoration: const BoxDecoration(
+                    color: Colors.red,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))),

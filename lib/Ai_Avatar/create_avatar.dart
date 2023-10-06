@@ -33,7 +33,7 @@ class _CreateAvatarState extends State<CreateAvatar> {
                   final user = userFromPrefs(widget.prefs);
                   if (!mounted) return;
                   if (user != null) {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => Profile(data: user)));

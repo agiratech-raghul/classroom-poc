@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:classroom_poc/Ai_Avatar/create_avatar.dart';
 import 'package:classroom_poc/Utils/utils.dart';
 import 'package:classroom_poc/image_edit/image_editer.dart';
+import 'package:classroom_poc/video_editer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,13 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("ClassRoom")),
+        backgroundColor: Colors.red,
+        title: const Center(child: Text("ClassRoom",style: TextStyle(color: Colors.white),)),
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          ElevatedButton(
+          ElevatedButton.icon(
+        icon: Icon(Icons.edit),
               onPressed: () {
-                Utils().myAlert(context, anotherImage: true, camera: () {
+                Utils().myAlert(context, anotherImage: false, camera: () {
                   Navigator.of(context).pop();
                   getImage(ImageSource.camera, addImage: true);
                 }, gallery: () {
@@ -46,12 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   getImage(ImageSource.gallery, addImage: true);
                 });
               },
-              child: const Text("Edit Image")),
-          ElevatedButton(
+              label: const Text("Edit Image")),
+          ElevatedButton.icon(
+            icon: Icon(Icons.animation),
               onPressed: () {
-
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateAvatar(prefs: prefs),));
-              }, child: const Text("Custom Animation"))
+              }, label: const Text("Custom Animation"),
+          ),
+          ElevatedButton.icon(
+            icon: Icon(Icons.video_settings),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => VideoEdit()));
+            }, label: const Text("video edit"),
+          ),
+
+
         ]),
       ),
     );
@@ -72,5 +85,18 @@ class _HomeScreenState extends State<HomeScreen> {
         image = null;
       });
     }
+  }
+}
+
+class Tom extends StatelessWidget {
+  const Tom({super.key});
+  @override
+  Widget build(BuildContext context) {
+    print(context.size);
+    return Container(
+      height: 20,
+      width: 20,
+        color: Colors.red,
+    );
   }
 }
