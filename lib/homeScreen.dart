@@ -5,8 +5,8 @@ import 'package:classroom_poc/Utils/utils.dart';
 import 'package:classroom_poc/image_edit/image_editer.dart';
 import 'package:classroom_poc/video_editer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,14 +18,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final prefs;
-  @override
-  void initState() {
-    storeImage();
-    // TODO: implement initState
-    super.initState();
-  }
+
   Future<void> storeImage()async{
      prefs = await SharedPreferences.getInstance();
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    storeImage();
   }
   File? image;
   final ImagePicker picker = ImagePicker();
@@ -70,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+
   Future getImage(ImageSource media, {bool addImage = false}) async {
     final XFile? img = await picker.pickImage(source: media);
     debugPrint("image checking $image");
@@ -79,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (image != null) {
       Navigator.of(context)
           .push(MaterialPageRoute(
-        builder: (_) => ImageEditer(image: image),
+        builder: (_) => ImageEditor(image: image),
       ))
           .then((value) {
         image = null;
